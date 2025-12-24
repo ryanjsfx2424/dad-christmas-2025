@@ -10,21 +10,74 @@ let score = 0;
 let gameSpeed = 5;
 let isGameOver = false;
 
-// Player Object
+// Load the car image
+const carImg = new Image();
+carImg.src = 'car.png'; // Make sure the file name matches your saved image
+
 const player = {
     x: 50,
     y: 150,
-    w: 40,
-    h: 40,
+    w: 80,  // Adjusted width for a car shape
+    h: 40,  // Adjusted height
     dy: 0,
     jumpForce: 12,
     gravity: 0.6,
     grounded: false,
     draw() {
-        ctx.fillStyle = '#ff4757';
-        ctx.fillRect(this.x, this.y, this.w, this.h);
+        if (carImg.complete) {
+            // Draws the image at the player's position and size
+            ctx.drawImage(carImg, this.x, this.y, this.w, this.h);
+        } else {
+            // Fallback to a block while loading
+            ctx.fillStyle = 'red';
+            ctx.fillRect(this.x, this.y, this.w, this.h);
+        }
     }
 };
+
+function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    // Draw "Road" lines
+    ctx.strokeStyle = "white";
+    ctx.setLineDash([20, 20]);
+    ctx.beginPath();
+    ctx.moveTo(0, canvas.height - 5);
+    ctx.lineTo(canvas.width, canvas.height - 5);
+    ctx.stroke();
+
+    player.draw();
+    
+    // Draw Obstacles
+    ctx.fillStyle = '#f1c40f'; // Bright yellow hazards
+    obstacles.forEach(obs => {
+        ctx.fillRect(obs.x, obs.y, obs.w, obs.h);
+    });
+
+    if (isGameOver) {
+        ctx.fillStyle = "rgba(0,0,0,0.7)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "white";
+        ctx.font = "20px Arial";
+        ctx.fillText("CRASHED! Press Space to Restart", canvas.width/2 - 150, canvas.height/2);
+    }
+}
+
+// // Player Object
+// const player = {
+//     x: 50,
+//     y: 150,
+//     w: 40,
+//     h: 40,
+//     dy: 0,
+//     jumpForce: 12,
+//     gravity: 0.6,
+//     grounded: false,
+//     draw() {
+//         ctx.fillStyle = '#ff4757';
+//         ctx.fillRect(this.x, this.y, this.w, this.h);
+//     }
+// };
 
 // Obstacle Logic
 const obstacles = [];
@@ -83,22 +136,22 @@ function update() {
     });
 }
 
-function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    player.draw();
+// function draw() {
+//     ctx.clearRect(0, 0, canvas.width, canvas.height);
+//     player.draw();
     
-    ctx.fillStyle = '#2f3542';
-    obstacles.forEach(obs => {
-        ctx.fillRect(obs.x, obs.y, obs.w, obs.h);
-    });
+//     ctx.fillStyle = '#2f3542';
+//     obstacles.forEach(obs => {
+//         ctx.fillRect(obs.x, obs.y, obs.w, obs.h);
+//     });
 
-    if (isGameOver) {
-        ctx.fillStyle = "rgba(0,0,0,0.5)";
-        ctx.fillRect(0,0, canvas.width, canvas.height);
-        ctx.fillStyle = "white";
-        ctx.fillText("GAME OVER - Press Space to Restart", canvas.width/2 - 100, canvas.height/2);
-    }
-}
+//     if (isGameOver) {
+//         ctx.fillStyle = "rgba(0,0,0,0.5)";
+//         ctx.fillRect(0,0, canvas.width, canvas.height);
+//         ctx.fillStyle = "white";
+//         ctx.fillText("GAME OVER - Press Space to Restart", canvas.width/2 - 100, canvas.height/2);
+//     }
+// }
 
 // Main Loop
 let timer = 0;
