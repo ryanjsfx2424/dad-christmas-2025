@@ -12,7 +12,7 @@ let isGameOver = false;
 
 // Load the car image
 const carImg = new Image();
-carImg.src = 'car.png'; // Make sure the file name matches your saved image
+carImg.src = 'corvette_v5.jpg'; // Make sure the file name matches your saved image
 
 const player = {
     x: 50,
