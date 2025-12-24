@@ -5,8 +5,12 @@
     <title>Simple Infinite Runner</title>
     <style>
         body { margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; background: #222; color: white; font-family: Arial, sans-serif; overflow: hidden; }
-        canvas { border: 2px solid #fff; background: #f0f0f0; }
+        /* canvas { border: 2px solid #fff; background: #f0f0f0; } */
         .score { position: absolute; top: 20px; font-size: 24px; color: white; }
+        canvas {
+    image-rendering: pixelated; /* Keeps the pixel art sharp */
+    background: #444; /* Dark road color */
+}
     </style>
 </head>
 <body>
