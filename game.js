@@ -173,7 +173,7 @@ function loop() {
     draw();
     
     timer++;
-    if (timer % 100 === 0) spawnObstacle();
+    if (timer % (100-score) === 0) spawnObstacle();
     
     requestAnimationFrame(loop);
 }
