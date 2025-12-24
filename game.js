@@ -14,7 +14,7 @@ let gameSpeed = originalGameSpeed;
 
 // Load the car image
 const carImg = new Image();
-carImg.src = 'corvette_v5.jpg'; // Make sure the file name matches your saved image
+carImg.src = 'corvette_v2.jpg'; // Make sure the file name matches your saved image
 
 const car_width = 80;
 const player = {
@@ -27,7 +27,15 @@ const player = {
     gravity: 0.6,
     grounded: false,
     draw() {
-        if (carImg.complete) {
+        if (score > 2) {
+            carImg.src = 'corvette_v2.jpg';
+            if (score > 5) {
+                carImg.src = 'corvette_v5.jpg';
+            } else if (score > 9) {
+                carImg.src = 'corvette_v5.png';
+            } else if (score > 14) {
+                carImg.src = 'corvette_v5p2.png';
+            }
             // Draws the image at the player's position and size
             ctx.drawImage(carImg, this.x, this.y, this.w, this.h);
         } else {
