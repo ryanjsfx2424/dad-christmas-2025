@@ -15,8 +15,8 @@ const carImg = new Image();
 carImg.src = 'corvette_v5.jpg'; // Make sure the file name matches your saved image
 
 const player = {
-    x: 50,
-    y: cavnas.width - 150,
+    x: canvas.width - 50,
+    y: 150,
     w: 80,  // Adjusted width for a car shape
     h: 40,  // Adjusted height
     dy: 0,
