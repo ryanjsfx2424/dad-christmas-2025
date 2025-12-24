@@ -7,8 +7,10 @@ canvas.height = 200;
 
 // Game State
 let score = 0;
-let gameSpeed = -5;
 let isGameOver = false;
+let gameOverSpeed = 0;
+let originalGameSpeed = -5;
+let gameSpeed = originalGameSpeed;
 
 // Load the car image
 const carImg = new Image();
@@ -60,6 +62,7 @@ function draw() {
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         ctx.fillStyle = "white";
         ctx.font = "20px Arial";
+        gameSpeed = gameOverSpeed;
         ctx.fillText("CRASHED! Press Space to Restart", canvas.width/2 - 150, canvas.height/2);
     }
 }
@@ -169,7 +172,7 @@ function loop() {
 
 function restartGame() {
     score = 0;
-    gameSpeed = 5;
+    gameSpeed = originalGameSpeed;
     obstacles.length = 0;
     isGameOver = false;
     scoreElement.innerText = 0;
