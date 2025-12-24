@@ -7,7 +7,7 @@ canvas.height = 200;
 
 // Game State
 let score = 0;
-let gameSpeed = 5;
+let gameSpeed = -5;
 let isGameOver = false;
 
 // Load the car image
@@ -16,7 +16,7 @@ carImg.src = 'corvette_v5.jpg'; // Make sure the file name matches your saved im
 
 const player = {
     x: 50,
-    y: 150,
+    y: 650,
     w: 80,  // Adjusted width for a car shape
     h: 40,  // Adjusted height
     dy: 0,
