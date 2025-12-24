@@ -14,10 +14,11 @@ let isGameOver = false;
 const carImg = new Image();
 carImg.src = 'corvette_v5.jpg'; // Make sure the file name matches your saved image
 
+const car_width = 80;
 const player = {
-    x: canvas.width - 50,
+    x: canvas.width - 2*car_width,
     y: 150,
-    w: 80,  // Adjusted width for a car shape
+    w: car_width,  // Adjusted width for a car shape
     h: 40,  // Adjusted height
     dy: 0,
     jumpForce: 12,
