@@ -16,7 +16,7 @@ carImg.src = 'corvette_v5.jpg'; // Make sure the file name matches your saved im
 
 const player = {
     x: 50,
-    y: 650,
+    y: cavnas.width - 150,
     w: 80,  // Adjusted width for a car shape
     h: 40,  // Adjusted height
     dy: 0,
@@ -84,7 +84,7 @@ const obstacles = [];
 function spawnObstacle() {
     let size = Math.random() * (50 - 20) + 20;
     obstacles.push({
-        x: canvas.width,
+        x: 0,
         y: canvas.height - size,
         w: 20,
         h: size
@@ -127,11 +127,12 @@ function update() {
         }
 
         // Remove off-screen obstacles
-        if (obs.x + obs.w < 0) {
+        // if (obs.x + obs.w < 0) {
+        if (obs.x + obs.w > canvas.width) {
             obstacles.splice(index, 1);
             score++;
             scoreElement.innerText = score;
-            if (score % 5 === 0) gameSpeed += 0.2; // Increase difficulty
+            if (score % 5 === 0) gameSpeed -= 0.2; // Increase difficulty
         }
     });
 }
