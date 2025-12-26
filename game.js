@@ -2,6 +2,8 @@ const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 const scoreElement = document.getElementById('scoreVal');
 
+const screenElement = document.documentElement; // Targets the whole screen (HTML element)
+
 canvas.width = 800;
 canvas.height = 200;
 
@@ -111,6 +113,15 @@ window.addEventListener('keydown', (e) => {
     }
     if (isGameOver && e.code === "Space") restartGame();
 });
+
+screenElement.addEventListener("touchstart", e) => {
+    if (player.grounded) {
+        player.dy = -player.jumpForce;
+        player.grounded = false;
+    }
+    if (isGameOver) restartGame();
+});
+                               
 
 function update() {
     if (isGameOver) return;
