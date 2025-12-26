@@ -34,9 +34,9 @@ const player = {
             if (score > 5) {
                 carImg.src = 'corvette_v5.jpg';
             } else if (score > 9) {
-                carImg.src = 'corvette_v5.png';
-            } else if (score > 14) {
-                carImg.src = 'corvette_v5p2.png';
+                carImg.src = 'corvette_black.JPG';
+           // } else if (score > 14) {
+             //   carImg.src = 'corvette_v5p2.png';
             }
             // Draws the image at the player's position and size
             ctx.drawImage(carImg, this.x, this.y, this.w, this.h);
@@ -177,12 +177,17 @@ function update() {
 //     }
 // }
 
+function delay(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 // Main Loop
 let timer = 0;
 function loop() {
     update();
     draw();
-    
+
+    await delay(1);
     timer++;
     if (timer % (100-score) === 0) spawnObstacle();
     
