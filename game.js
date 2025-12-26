@@ -29,18 +29,19 @@ const player = {
     gravity: 0.6,
     grounded: false,
     draw() {
-        if (score > 2) {
-            carImg.src = 'corvette_v2.jpg';
-            if (score > 5) {
-                carImg.src = 'corvette_v5.jpg';
-            } else if (score > 9) {
-                carImg.src = 'corvette_black.JPG';
-           // } else if (score > 14) {
-             //   carImg.src = 'corvette_v5p2.png';
-            }
-            // Draws the image at the player's position and size
+        if (score > 9) {
+            carImg.src = 'corvette_black.JPG;
             ctx.drawImage(carImg, this.x, this.y, this.w, this.h);
-        } else {
+        }
+        else if (score > 5) {
+            carImg.src = 'corvette_v5.jpg';
+            ctx.drawImage(carImg, this.x, this.y, this.w, this.h);
+        } 
+        else if (score > 2) {
+            carImg.src = 'corvette_v2.jpg';
+            ctx.drawImage(carImg, this.x, this.y, this.w, this.h);
+        }
+        else {
             // Fallback to a block while loading
             ctx.fillStyle = 'red';
             ctx.fillRect(this.x, this.y, this.w, this.h);
