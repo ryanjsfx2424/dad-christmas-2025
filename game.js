@@ -207,7 +207,7 @@ function update(dt) {
             isGameOver = true;
         }
 
-        if (obs.x + obs.w < 0) {
+        if (obs.x + obs.w > canvas.width) {
             obstacles.splice(index, 1);
             score++;
             scoreElement.innerText = score;
