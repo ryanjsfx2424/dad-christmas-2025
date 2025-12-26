@@ -114,7 +114,7 @@ window.addEventListener('keydown', (e) => {
     if (isGameOver && e.code === "Space") restartGame();
 });
 
-screenElement.addEventListener("touchstart", e) => {
+screenElement.addEventListener("touchstart", (e) => {
     if (player.grounded) {
         player.dy = -player.jumpForce;
         player.grounded = false;
