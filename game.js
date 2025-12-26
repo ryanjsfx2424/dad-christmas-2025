@@ -199,7 +199,7 @@ function loop() {
 
     //await delay(1);
     timer++;
-    if (timer % (200-score) === 0) spawnObstacle();
+    if (timer % ((Math.random()*50)+150-score) === 0) spawnObstacle();
     
     requestAnimationFrame(loop);
 }
