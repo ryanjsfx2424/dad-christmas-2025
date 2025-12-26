@@ -14,7 +14,7 @@ let gameOverSpeed = 0;
 let originalGameSpeed = -5;
 let gameSpeed = originalGameSpeed;
 
-let newObstacleTime = ((Math.random()*50)+150-score);
+let newObstacleTime = Math.floor((Math.random()*50)+150-score);
 
 // Load the car image
 const carImg = new Image();
@@ -157,7 +157,7 @@ function update() {
         if (obs.x + obs.w > canvas.width) {
             obstacles.splice(index, 1);
             score++;
-            newObstacleTime = ((Math.random()*50)+150-score);
+            newObstacleTime = Math.floor((Math.random()*50)+150-score);
             scoreElement.innerText = score;
             if (score === 3) {
                 gameSpeed = originalGameSpeed-1;
@@ -200,7 +200,7 @@ function loop() {
     update();
     draw();
 
-    //await delay(1);
+    //await delay(1)
     timer++;
     if (timer % newObstacleTime === 0) spawnObstacle();
     
