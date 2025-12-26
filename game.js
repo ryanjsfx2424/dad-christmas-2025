@@ -30,7 +30,7 @@ const player = {
     grounded: false,
     draw() {
         if (score > 9) {
-            carImg.src = 'corvette_black.JPG;
+            carImg.src = 'corvette_black.JPG';
             ctx.drawImage(carImg, this.x, this.y, this.w, this.h);
         }
         else if (score > 5) {
