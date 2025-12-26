@@ -189,7 +189,7 @@ function loop() {
 
     await delay(1);
     timer++;
-    if (timer % (100-score) === 0) spawnObstacle();
+    if (timer % (200-score) === 0) spawnObstacle();
     
     requestAnimationFrame(loop);
 }
