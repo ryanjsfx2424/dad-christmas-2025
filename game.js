@@ -16,6 +16,10 @@ let gameSpeed = originalGameSpeed;
 
 let newObstacleTime = Math.floor((Math.random()*50)+150-score);
 
+let lastTime = 0;
+let obstacleTimer = 0;
+const obstacleInterval = 1500; // Spawn every 1500ms (1.5 seconds)
+
 // Load the car image
 const carImg = new Image();
 carImg.src = 'corvette_v2.jpg'; // Make sure the file name matches your saved image
@@ -125,7 +129,7 @@ screenElement.addEventListener("touchstart", (e) => {
     if (isGameOver) restartGame();
 });
                                
-
+/*
 function update() {
     if (isGameOver) return;
 
@@ -172,6 +176,45 @@ function update() {
         }
     });
 }
+*/
+
+function update(dt) {
+    if (isGameOver) return;
+
+    // Use a multiplier (dt / 16) so "16ms" (60fps) is our base speed
+    const timeScale = dt / 16.67;
+
+    // Player Physics adjusted for time
+    player.dy += player.gravity * timeScale;
+    player.y += player.dy * timeScale;
+
+    // Ground Collision
+    if (player.y + player.h > canvas.height) {
+        player.y = canvas.height - player.h;
+        player.dy = 0;
+        player.grounded = true;
+    }
+
+    // Move Obstacles adjusted for time
+    obstacles.forEach((obs, index) => {
+        obs.x -= gameSpeed * timeScale;
+
+        // Collision Detection
+        if (player.x < obs.x + obs.w &&
+            player.x + player.w > obs.x &&
+            player.y < obs.y + obs.h &&
+            player.y + player.h > obs.y) {
+            isGameOver = true;
+        }
+
+        if (obs.x + obs.w < 0) {
+            obstacles.splice(index, 1);
+            score++;
+            scoreElement.innerText = score;
+            if (score % 5 === 0) gameSpeed += 0.2;
+        }
+    });
+}
 
 // function draw() {
 //     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -194,7 +237,32 @@ function delay(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+
+
+
+function loop(timestamp) {
+    // Calculate how many ms have passed since last frame
+    let deltaTime = timestamp - lastTime;
+    lastTime = timestamp;
+
+    // Avoid massive jumps if the user switches tabs
+    if (deltaTime > 100) deltaTime = 16; 
+
+    update(deltaTime);
+    draw();
+    
+    // Spawn obstacles based on real time, not frames
+    obstacleTimer += deltaTime;
+    if (obstacleTimer > obstacleInterval) {
+        spawnObstacle();
+        obstacleTimer = 0;
+    }
+    
+    requestAnimationFrame(loop);
+}
+
 // Main Loop
+/*
 let timer = 0;
 function loop() {
     update();
@@ -206,6 +274,7 @@ function loop() {
     
     requestAnimationFrame(loop);
 }
+*/
 
 function restartGame() {
     score = 0;
@@ -215,4 +284,4 @@ function restartGame() {
     scoreElement.innerText = 0;
 }
 
-loop();
+loop(lastTime);
