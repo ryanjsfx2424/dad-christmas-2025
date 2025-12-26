@@ -155,7 +155,7 @@ function update() {
             obstacles.splice(index, 1);
             score++;
             scoreElement.innerText = score;
-            if (score % 3 === 0) gameSpeed -= 0.1*score; // Increase difficulty
+            if (score % 3 === 0) gameSpeed -= 0.01*score; // Increase difficulty
         }
     });
 }
