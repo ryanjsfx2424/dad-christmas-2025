@@ -14,11 +14,11 @@ let gameOverSpeed = 0;
 let originalGameSpeed = -5;
 let gameSpeed = originalGameSpeed;
 
-let newObstacleTime = Math.floor((Math.random()*50)+150-score);
+let newObstacleTime = Math.floor((Math.random()*1500)+1500-score);
 
 let lastTime = 0;
 let obstacleTimer = 0;
-const obstacleInterval = 1500; // Spawn every 1500ms (1.5 seconds)
+//const obstacleInterval = 1500; // Spawn every 1500ms (1.5 seconds)
 
 // Load the car image
 const carImg = new Image();
@@ -210,8 +210,17 @@ function update(dt) {
         if (obs.x + obs.w > canvas.width) {
             obstacles.splice(index, 1);
             score++;
+            let newObstacleTime = Math.floor((Math.random()*1500)+1500-score);
             scoreElement.innerText = score;
-            if (score % 5 === 0) gameSpeed += 0.2;
+            if (score === 3) {
+                gameSpeed = originalGameSpeed-1;
+            }
+            if (score === 6) {
+                gameSpeed = originalGameSpeed-2;
+            }
+            if (score > 9) {
+                gameSpeed = originalGameSpeed-score/3;
+            }
         }
     });
 }
