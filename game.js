@@ -210,7 +210,7 @@ function update(dt) {
         if (obs.x + obs.w > canvas.width) {
             obstacles.splice(index, 1);
             score++;
-            let newObstacleTime = Math.floor((Math.random()*1500)+1500-score);
+            newObstacleTime = Math.floor((Math.random()*1500)+1500-score);
             scoreElement.innerText = score;
             if (score === 3) {
                 gameSpeed = originalGameSpeed-1;
@@ -262,10 +262,11 @@ function loop(timestamp) {
     
     // Spawn obstacles based on real time, not frames
     obstacleTimer += deltaTime;
-    if (obstacleTimer > obstacleInterval) {
+    if (obstacleTimer > newObstacleTime) {
         spawnObstacle();
         obstacleTimer = 0;
     }
+    
     
     requestAnimationFrame(loop);
 }
