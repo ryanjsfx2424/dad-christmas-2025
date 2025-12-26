@@ -155,7 +155,16 @@ function update() {
             obstacles.splice(index, 1);
             score++;
             scoreElement.innerText = score;
-            if (score % 3 === 0) gameSpeed -= 0.01*score; // Increase difficulty
+            if (score === 3) {
+                gameSpeed = originalGameSpeed-1;
+            }
+            if (score === 6) {
+                gameSpeed = originalGameSpeed-2;
+            }
+            if (score > 9) {
+                gameSpeed = originalGameSpeed-score/3;
+            }
+            //if (score % 3 === 0) gameSpeed -= 0.01*score; // Increase difficulty
         }
     });
 }
@@ -189,7 +198,7 @@ function loop() {
 
     //await delay(1);
     timer++;
-    if (timer % (100-score) === 0) spawnObstacle();
+    if (timer % (200-score) === 0) spawnObstacle();
     
     requestAnimationFrame(loop);
 }
