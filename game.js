@@ -14,6 +14,8 @@ let gameOverSpeed = 0;
 let originalGameSpeed = -5;
 let gameSpeed = originalGameSpeed;
 
+let newObstacleTime = ((Math.random()*50)+150-score);
+
 // Load the car image
 const carImg = new Image();
 carImg.src = 'corvette_v2.jpg'; // Make sure the file name matches your saved image
@@ -155,6 +157,7 @@ function update() {
         if (obs.x + obs.w > canvas.width) {
             obstacles.splice(index, 1);
             score++;
+            newObstacleTime = ((Math.random()*50)+150-score);
             scoreElement.innerText = score;
             if (score === 3) {
                 gameSpeed = originalGameSpeed-1;
@@ -199,7 +202,7 @@ function loop() {
 
     //await delay(1);
     timer++;
-    if (timer % ((Math.random()*50)+150-score) === 0) spawnObstacle();
+    if (timer % newObstacleTime === 0) spawnObstacle();
     
     requestAnimationFrame(loop);
 }
